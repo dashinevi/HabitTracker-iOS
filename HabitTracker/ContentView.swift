@@ -7,17 +7,40 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
+    @State private var habits: [Habit] = [
+        Habit(title: "Study", description: "Study for 2 hours", color: .white, goal: 100, frequency: 10, goalPeriod: "Week", completedDates: [])
+    ]
+   
+    @State private var isShowingSheet = false
+    
+    @State private var activeTab: Tab = .home
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                switch activeTab {
+                case .home:
+                    HomeView(habits: $habits)
+                case .progress:
+                    ProgressView(habits: $habits)
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .bottomBar) {
+                    TabBarView(selectedTab: $activeTab) {
+                        self.isShowingSheet.toggle()
+                    }
+                }
+            }
+            .sheet(isPresented: $isShowingSheet) {
+                HabitDetailsView(habits: $habits, isShowingSheet: $isShowingSheet)
+            }
         }
-        .padding()
     }
 }
+
 
 #Preview {
     ContentView()
