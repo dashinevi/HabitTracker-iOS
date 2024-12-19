@@ -5,13 +5,12 @@
 //  Created by Diana Dashinevich on 10/12/2024.
 //
 
+import SwiftData
 import SwiftUI
 
-
 struct ContentView: View {
-    @State private var habits: [Habit] = [
-        Habit(title: "Study", description: "Study for 2 hours", color: .white, goal: 100, frequency: 10, goalPeriod: "Week", completedDates: [])
-    ]
+    @Environment(\.modelContext) var modelContext
+    @Query var habits: [Habit]
    
     @State private var isShowingSheet = false
     
@@ -22,9 +21,9 @@ struct ContentView: View {
             VStack {
                 switch activeTab {
                 case .home:
-                    HomeView(habits: $habits)
+                    HomeView()
                 case .progress:
-                    ProgressView(habits: $habits)
+                    ProgressView()
                 }
             }
             .toolbar {
@@ -35,12 +34,11 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $isShowingSheet) {
-                HabitDetailsView(habits: $habits, isShowingSheet: $isShowingSheet)
+                HabitDetailsView(isShowingSheet: $isShowingSheet)
             }
         }
     }
 }
-
 
 #Preview {
     ContentView()

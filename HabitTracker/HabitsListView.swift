@@ -5,9 +5,11 @@
 //  Created by Diana Dashinevich on 13/12/2024.
 //
 import SwiftUI
+import SwiftData
 
 struct HabitsListView: View {
-    @Binding var habits: [Habit]
+    @Environment(\.modelContext) var modelContext
+    @Query var habits: [Habit]
     
     var body: some View {
         ScrollView {
@@ -15,9 +17,9 @@ struct HabitsListView: View {
                 ForEach(habits) { habit in
                     HabitItemView(habit: habit)
                         .contextMenu {
-                            Button("Edit", systemImage: "pencil") {}
+//                            Button("Edit", systemImage: "pencil") {}
                             Button("Delete", systemImage: "trash", role: .destructive) {
-                                habits.removeAll(where: { $0.id == habit.id })
+                                self.modelContext.delete(habit)
                             }
                         }
                 }

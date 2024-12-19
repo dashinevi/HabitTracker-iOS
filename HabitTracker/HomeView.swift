@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-    @Binding var habits: [Habit]
-    
     var body: some View {
         VStack(alignment: .leading) {
             Spacer()
@@ -40,7 +38,7 @@ struct HomeView: View {
             
             Spacer()
             
-            HabitsListView(habits: $habits)
+            HabitsListView()
         }
     }
 }

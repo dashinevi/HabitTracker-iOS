@@ -4,11 +4,13 @@
 //
 //  Created by Diana Dashinevich on 14/12/2024.
 //
+
 import SwiftUI
+import SwiftData
 
 struct ProgressView: View {
-    @Binding var habits: [Habit]
-    
+    @Environment(\.modelContext) var modelContext
+    @Query var habits: [Habit]
     
     var body: some View {
         VStack {
@@ -21,7 +23,15 @@ struct ProgressView: View {
         ScrollView {
             VStack (spacing: 10) {
                 ForEach(habits) { habit in
-                    ProgressItemView(title: habit.title, description: habit.description, color: habit.color, goal: habit.goal, frequency: habit.frequency, goalPeriod: habit.goalPeriod, completedDates: habit.completedDates)
+                    ProgressItemView(
+                        title: habit.title,
+                        description: habit.details,
+                        color: Color(hex: habit.colorHex) ?? .white,
+                        goal: habit.goal,
+                        frequency: habit.frequency,
+                        goalPeriod: habit.goalPeriod,
+                        completedDates: habit.completedDates
+                    )
                 }
             }
             .padding()

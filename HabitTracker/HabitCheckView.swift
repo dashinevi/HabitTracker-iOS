@@ -5,9 +5,10 @@
 //  Created by Diana Dashinevich on 17/12/2024.
 //
 import SwiftUI
+import SwiftData
 
 struct HabitCheckView: View {
-    @Binding var habit: Habit
+    @Bindable var habit: Habit
     
     var body: some View {
         Button(action: {

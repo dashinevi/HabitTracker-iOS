@@ -5,39 +5,29 @@
 //  Created by Diana Dashinevich on 13/12/2024.
 //
 import SwiftUI
-
-struct Habit: Identifiable {
-    let id = UUID()
-    var title: String
-    var description: String?
-    var color: Color
-    var goal: Int
-    var frequency: Int
-    var goalPeriod: String
-    var completedDates: [Date]
-}
+import SwiftData
 
 struct HabitItemView: View {
-    @State var habit: Habit
+    @Bindable var habit: Habit
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
                 Text(habit.title)
                     .font(.headline)
-                if let description = habit.description {
-                    Text(description)
+                if let details = habit.details {
+                    Text(details)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
             }
             Spacer()
-            HabitCheckView(habit: $habit)
+            HabitCheckView(habit: habit)
         }
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 13)
-                .fill(habit.color)
+                .fill(Color(hex: habit.colorHex) ?? .white )
                 .strokeBorder(Color.primary, lineWidth: 1, antialiased: true)
         )
     }

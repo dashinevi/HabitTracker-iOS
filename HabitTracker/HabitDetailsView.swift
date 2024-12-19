@@ -7,9 +7,9 @@
 import SwiftUI
 
 struct HabitDetailsView: View {
-    @Binding var habits: [Habit]
+    @Environment(\.modelContext) var modelContext
     @Binding var isShowingSheet: Bool
-    
+        
     @State private var habitTitle = ""
     @State private var habitDescription: String = ""
     @State private var goal: Int = 0
@@ -30,7 +30,7 @@ struct HabitDetailsView: View {
                 Spacer()
                 
                 Button("Save") {
-                    addHabit(title: habitTitle, description: habitDescription, goal: goal, goalPeriod: goalPeriod, color: selectedColor)
+                    addHabit()
                     habitTitle = ""
                     habitDescription = ""
                     goal = 0
@@ -101,9 +101,20 @@ struct HabitDetailsView: View {
     
     
     
-    func addHabit(title: String, description: String?, goal: Int, goalPeriod: String, color: Color) {
-        if !title.isEmpty {
-            habits.append(Habit(title: title, description: description, color: color, goal: goal, frequency: frequency, goalPeriod: goalPeriod, completedDates: []))
+    func addHabit() {
+        if !habitTitle.isEmpty {
+            
+            modelContext.insert(
+                Habit(
+                    title: habitTitle,
+                    details: habitDescription,
+                    colorHex: selectedColor.toHexString() ?? "FFFFF",
+                    goal: goal,
+                    frequency: frequency,
+                    goalPeriod: goalPeriod
+                )
+            )
+//            habits.append(Habit(title: title, description: description, color: color, goal: goal, frequency: frequency, goalPeriod: goalPeriod, completedDates: []))
         }
     }
 }
