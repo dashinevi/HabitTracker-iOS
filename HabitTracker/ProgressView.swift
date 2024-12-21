@@ -13,13 +13,18 @@ struct ProgressView: View {
     @Query var habits: [Habit]
     
     var body: some View {
-        VStack {
-            Text("Statistics")
-                .fontDesign(.rounded)
-                .font(.headline)
-                .fontWeight(.bold)
+        VStack (alignment: .leading) {
+            HStack {
+                Text("Statistics")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.myPrimary)
+                Spacer()
+            }
             CurrentWeekView()
         }
+        .padding(.horizontal)
+        
         ScrollView {
             VStack (spacing: 10) {
                 ForEach(habits) { habit in
@@ -35,18 +40,12 @@ struct ProgressView: View {
                 }
             }
             .padding()
-           
         }
     }
 }
 
 
-//#Preview {
-//    ProgressView(
-//        habits: .constant([
-//            Habit(title: "title", description: "desc", color: .clear, goal: 10, frequency: 10, goalPeriod: "Week"),
-//            Habit(title: "title", description: "desc", color: .clear, goal: 10, frequency: 10, goalPeriod: "Week")
-//        ])
-//    )
-//}
+#Preview {
+    ProgressView()
+}
 

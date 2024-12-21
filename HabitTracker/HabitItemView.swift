@@ -27,7 +27,7 @@ struct HabitItemView: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 13)
-                .fill(Color(hex: habit.colorHex) ?? .white )
+                .fill(Color(hex: habit.colorHex)?.opacity(0.5) ?? .white )
                 .strokeBorder(Color.primary, lineWidth: 1, antialiased: true)
         )
     }

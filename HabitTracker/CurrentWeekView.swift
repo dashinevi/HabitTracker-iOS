@@ -31,11 +31,9 @@ struct CurrentWeekView: View {
         VStack {
             Text(getCurrentWeekRange())
                 .font(.title3)
-                .fontDesign(.rounded)
                 .fontWeight(.bold)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(.mySecondary)
         }
-        .padding()
     }
 }
 

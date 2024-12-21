@@ -36,6 +36,7 @@ struct ContentView: View {
             .sheet(isPresented: $isShowingSheet) {
                 HabitDetailsView(isShowingSheet: $isShowingSheet)
             }
+//            .background(Color.red)
         }
     }
 }

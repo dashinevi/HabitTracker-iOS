@@ -5,6 +5,7 @@
 //  Created by Diana Dashinevich on 16/12/2024.
 //
 import SwiftUI
+import SwiftData
 
 struct HabitDetailsView: View {
     @Environment(\.modelContext) var modelContext
@@ -20,12 +21,13 @@ struct HabitDetailsView: View {
     @State private var selectedColor: Color = .white
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack {
             HStack {
                 Button("Cancel") {
                     isShowingSheet.toggle()
                 }
                 .buttonStyle(.borderless)
+                .foregroundStyle(.mySecondary)
                 
                 Spacer()
                 
@@ -40,26 +42,40 @@ struct HabitDetailsView: View {
                     isShowingSheet = false
                 }
                 .disabled(habitTitle.isEmpty)
+                .foregroundStyle(.myAccent.opacity(habitTitle.isEmpty ? 0.5 : 1))
+                
             }
             .padding()
             
             HStack {
-                Spacer()
                 Text("Add a New Habit")
-                    .fontDesign(.rounded)
-                    .font(.title2)
+                    .font(.title)
                     .fontWeight(.semibold)
+                    .foregroundStyle(.myPrimary)
                 Spacer()
             }
             
-            TextField("Enter a habit title", text: $habitTitle)
-                .textFieldStyle(.roundedBorder)
-            
-            TextField("Enter a description", text: $habitDescription)
-                .textFieldStyle(.roundedBorder)
+            VStack {
+                
+                TextField("Enter a habit title", text: $habitTitle)
+                    .frame(height: 50)
+                    .padding(.horizontal)
+                    .overlay(RoundedRectangle(cornerRadius: 15)
+                        .stroke(.secondary, lineWidth: 1)
+                        .fill(.clear)
+                        .frame(maxWidth: .infinity))
+                
+                TextField("Enter a description", text: $habitDescription)
+                    .frame(height: 50)
+                    .padding(.horizontal)
+                    .overlay(RoundedRectangle(cornerRadius: 15)
+                        .stroke(.secondary, lineWidth: 1)
+                        .fill(.clear)
+                        .frame(maxWidth: .infinity))
+            }
+          
             
             Text("Goal")
-                .fontDesign(.rounded)
                 .font(.body)
                 .fontWeight(.semibold)
             
@@ -114,9 +130,20 @@ struct HabitDetailsView: View {
                     goalPeriod: goalPeriod
                 )
             )
-//            habits.append(Habit(title: title, description: description, color: color, goal: goal, frequency: frequency, goalPeriod: goalPeriod, completedDates: []))
         }
     }
 }
 
-
+#Preview {
+    struct HabitDetailsPreview: View {
+        @State private var isSheetVisible = true
+        
+        var body: some View {
+            HabitDetailsView(
+                isShowingSheet: $isSheetVisible
+            )
+        }
+    }
+    
+    return HabitDetailsPreview()
+}

@@ -53,9 +53,6 @@ struct ProgressItemView: View {
     }
 }
 
-//#Preview {
-//    ProgressItemView(
-//        title: "Study", description: "desc", color: .clear, goal: 100, frequency: 10, goalPeriod: "Week"
-//    )
-//    .frame(width: 380, height: 30)
-//}
+#Preview {
+    ProgressItemView(title: "Meditation", description: "30 minutes", color: .white, goal: 20, frequency: 2, goalPeriod: "Week", completedDates: [])
+}

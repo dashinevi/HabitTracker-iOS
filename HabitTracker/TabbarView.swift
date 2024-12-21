@@ -39,14 +39,14 @@ struct TabBarView: View {
                     selectedTab = .home
                 }
             }
-            .tint(selectedTab == .home ? .pink : .black)
+            .tint(selectedTab == .home ? .myPrimary : .mySecondary)
             Spacer()
             Button {
                 addAction()
             } label: {
                 ZStack {
                     Circle()
-                        .fill(Color.pink)
+                        .fill(Color.myPrimary)
                         .frame(width: 70, height: 70)
                     Image(systemName: "plus")
                         .foregroundColor(.white)
@@ -59,7 +59,7 @@ struct TabBarView: View {
                     selectedTab = .progress
                 }
             }
-            .tint(selectedTab == .progress ? .pink : .black)
+            .tint(selectedTab == .progress ? .myPrimary : .mySecondary)
             
             Spacer()
         }

@@ -13,17 +13,20 @@ struct HabitCheckView: View {
     var body: some View {
         Button(action: {
             let today = Calendar.current.startOfDay(for: Date())
-            if !habit.completedDates.contains(today) {
-                habit.completedDates.append(today) 
+            if let index = habit.completedDates.firstIndex(of: today) {
+                habit.completedDates.remove(at: index)
+            } else {
+                habit.completedDates.append(today)
             }
         }) {
             Image(systemName: habit.completedDates.contains(Calendar.current.startOfDay(for: Date())) ? "checkmark.circle.fill" : "circle")
                 .resizable()
                 .frame(width: 25, height: 25)
-                .foregroundColor(.green)
+                .foregroundColor(.black)
         }
     }
 }
+
 
 
 

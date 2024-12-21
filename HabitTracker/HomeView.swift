@@ -8,46 +8,44 @@
 import SwiftUI
 
 struct HomeView: View {
+    @AppStorage("user_name") var name: String = ""
+    
     var body: some View {
         VStack(alignment: .leading) {
-            Spacer()
-            
             VStack(alignment: .leading) {
-                Text("Hello, Kate!")
+                Text("Hello, \(name.isEmpty ? "Friend" : name)!")
                     .font(.title)
-                    .fontDesign(.rounded)
                     .fontWeight(.bold)
-                    .foregroundStyle(.pink)
+                    .foregroundStyle(.myPrimary)
                 
                 Text("How are you feeling today?")
                     .font(.title3)
-                    .fontDesign(.rounded)
                     .fontWeight(.bold)
             }
-            .frame(width: 300, height: 80)
+            .padding(.horizontal)
             
-            HStack {
-                Spacer()
-                Text(Date.now, format: .dateTime.day().month().year())
-                    .font(.title3)
-                    .fontDesign(.rounded)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.secondary)
+            ZStack (alignment: .top) {
+                Image(.homeViewPic)
+                    .resizable()
+                    .scaledToFit()
+               
+                    HStack {
+                        Spacer()
+                        Text(Date.now, format: .dateTime.day().month().year())
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .foregroundStyle(.mySecondary)
+                    }
+                    .padding(.horizontal)
             }
-            .padding()
             
             Spacer()
-            
-            HabitsListView()
+                
+                HabitsListView()
         }
     }
 }
 
-//#Preview {
-//    HomeView(
-//        habits: .constant([
-//            Habit(title: "title", description: "desc", color: .clear, goal: 10, frequency: 10, goalPeriod: "Week"),
-//            Habit(title: "title", description: "desc", color: .clear, goal: 10, frequency: 10, goalPeriod: "Week")
-//        ])
-//    )
-//}
+#Preview {
+    HomeView(name: "$name")
+}

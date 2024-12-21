@@ -27,7 +27,7 @@ struct CalendarView: View {
                             .foregroundColor(.black)
                         
                         Circle()
-                            .fill(isDayActive(weekday: weekday) ? Color.green : .clear)
+                            .fill(isDayActive(weekday: weekday) ? Color.myAccent : .clear)
                             .frame(width: 10, height: 10)
                     }
                 }
