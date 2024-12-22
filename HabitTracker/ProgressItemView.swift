@@ -11,7 +11,6 @@ struct ProgressItemView: View {
     let title: String
     let description: String?
     let color: Color
-    let goal: Int
     let frequency: Int
     let goalPeriod: String
     let completedDates: [Date]
@@ -21,7 +20,7 @@ struct ProgressItemView: View {
             HStack {
                 Spacer()
                 Image(systemName: "flame")
-                Text("\(goal)")
+                Text("\(completedDates.count)")
                     .fontWeight(.semibold)
             }
             .padding()
@@ -54,5 +53,5 @@ struct ProgressItemView: View {
 }
 
 #Preview {
-    ProgressItemView(title: "Meditation", description: "30 minutes", color: .white, goal: 20, frequency: 2, goalPeriod: "Week", completedDates: [])
+    ProgressItemView(title: "Meditation", description: "30 minutes", color: .white, /*goal: 20,*/ frequency: 2, goalPeriod: "Week", completedDates: [])
 }

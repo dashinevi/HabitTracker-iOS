@@ -32,7 +32,6 @@ struct ProgressView: View {
                         title: habit.title,
                         description: habit.details,
                         color: Color(hex: habit.colorHex) ?? .white,
-                        goal: habit.goal,
                         frequency: habit.frequency,
                         goalPeriod: habit.goalPeriod,
                         completedDates: habit.completedDates

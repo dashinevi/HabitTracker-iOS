@@ -10,12 +10,12 @@ import SwiftData
 struct HabitDetailsView: View {
     @Environment(\.modelContext) var modelContext
     @Binding var isShowingSheet: Bool
+    
         
     @State private var habitTitle = ""
     @State private var habitDescription: String = ""
-    @State private var goal: Int = 0
     @State private var frequency: Int = 0
-    @State private var goalPeriod = "Week"
+    @State private var goalPeriod: GoalPeriods = .Week
     let goalPeriods = ["Week", "Month", "Year"]
        
     @State private var selectedColor: Color = .white
@@ -35,9 +35,8 @@ struct HabitDetailsView: View {
                     addHabit()
                     habitTitle = ""
                     habitDescription = ""
-                    goal = 0
                     frequency = 0
-                    goalPeriod = "Week"
+                    goalPeriod = .Week
                     selectedColor = .white
                     isShowingSheet = false
                 }
@@ -55,8 +54,7 @@ struct HabitDetailsView: View {
                 Spacer()
             }
             
-            VStack {
-                
+            VStack(alignment: .leading) {
                 TextField("Enter a habit title", text: $habitTitle)
                     .frame(height: 50)
                     .padding(.horizontal)
@@ -72,45 +70,48 @@ struct HabitDetailsView: View {
                         .stroke(.secondary, lineWidth: 1)
                         .fill(.clear)
                         .frame(maxWidth: .infinity))
-            }
-          
-            
-            Text("Goal")
-                .font(.body)
-                .fontWeight(.semibold)
-            
-            TextField("Goal", value: $goal, format: .number)
-                .textFieldStyle(.roundedBorder)
-                .keyboardType(.numberPad)
-            
-            Text("Frequency")
-                .fontDesign(.rounded)
-                .font(.body)
-                .fontWeight(.semibold)
-            
-            HStack {
-                TextField("Frequency", value: $frequency, format: .number)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(width: 80)
-                    .keyboardType(.numberPad)
                 
-                Text("/")
-                    .foregroundColor(.secondary)
+                Text("Goal & Goal Period")
+                    .font(.body)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.myPrimary)
+                    .padding(.vertical)
                 
-                Picker("Goal Period", selection: $goalPeriod) {
-                    ForEach(goalPeriods, id: \.self) {
-                        Text($0)
-                    }
+                
+                HStack {
+                    TextField("Goal", value: $frequency, format: .number)
+                        .frame(width: 35)
+                        .padding(.horizontal)
+                        .overlay(RoundedRectangle(cornerRadius: 15)
+                            .stroke(.secondary, lineWidth: 1)
+                            .fill(.clear)
+                            .frame(height: 50))
+                        .keyboardType(.numberPad)
+                    Spacer()
+                    Text("times per")
+                        .foregroundColor(.secondary)
+                        .font(.callout)
+                    Spacer()
+                    
+                    CustomSegmentedControl(selectedItem: $goalPeriod)
+    
                 }
-                .pickerStyle(.segmented)
+                Text("*Complete \(frequency) times every \(goalPeriod)")
+                    .font(.caption)
+                    .padding(.vertical, 5)
             }
-            
             ColorPicker("Set the background color", selection: $selectedColor, supportsOpacity: false)
-                .fontDesign(.rounded)
+                .foregroundStyle(.myPrimary)
                 .font(.body)
                 .fontWeight(.semibold)
+                .padding(.vertical)
             
             Spacer()
+            
+            Image(.habitDetailsPic)
+                .resizable()
+                .scaledToFit()
+            
         }
         .padding(.horizontal)
     }
@@ -125,9 +126,9 @@ struct HabitDetailsView: View {
                     title: habitTitle,
                     details: habitDescription,
                     colorHex: selectedColor.toHexString() ?? "FFFFF",
-                    goal: goal,
+//                    goal: goal,
                     frequency: frequency,
-                    goalPeriod: goalPeriod
+                    goalPeriod: goalPeriod.rawValue
                 )
             )
         }

@@ -14,16 +14,14 @@ class Habit {
     var title: String
     var details: String?
     var colorHex: String
-    var goal: Int
     var frequency: Int
     var goalPeriod: String
     var completedDates: [Date]
     
-    init(title: String, details: String? = nil, colorHex: String, goal: Int, frequency: Int, goalPeriod: String, completedDates: [Date] = []) {
+    init(title: String, details: String? = nil, colorHex: String, /*goal: Int,*/ frequency: Int, goalPeriod: String, completedDates: [Date] = []) {
         self.title = title
         self.details = details
         self.colorHex = colorHex
-        self.goal = goal
         self.frequency = frequency
         self.goalPeriod = goalPeriod
         self.completedDates = completedDates
