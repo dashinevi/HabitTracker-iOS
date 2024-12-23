@@ -12,28 +12,43 @@ struct HabitsListView: View {
     @Query var habits: [Habit]
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 10) {
-                ForEach(habits) { habit in
-                    HabitItemView(habit: habit)
-                        .contextMenu {
-//                            Button("Edit", systemImage: "pencil") {}
-                            Button("Delete", systemImage: "trash", role: .destructive) {
-                                self.modelContext.delete(habit)
-                            }
-                        }
-                }
+        if habits.isEmpty {
+            VStack {
+                Image(systemName: "list.clipboard")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50, height: 50)
+                    .foregroundStyle(.mySecondary)
+                    .padding(.vertical)
+                Text("No habits yet")
+                    .font(.title3)
+                    .fontWeight(.bold)
+                    .foregroundStyle(.mySecondary)
+                Spacer()
             }
-            .padding(.horizontal, 10)
+            .frame(maxWidth: .infinity)
+        } else {
+            ScrollView {
+                VStack(spacing: 10) {
+                    
+                    
+                    ForEach(habits) { habit in
+                        HabitItemView(habit: habit)
+                            .contextMenu {
+    //                            Button("Edit", systemImage: "pencil") {}
+                                Button("Delete", systemImage: "trash", role: .destructive) {
+                                    self.modelContext.delete(habit)
+                                }
+                            }
+                    }
+                }
+                .padding(.horizontal, 10)
+            }
         }
     }
 }
 
-//#Preview {
-//    HabitsListView(
-//        habits: .constant([
-//            Habit(title: "title", description: "desc", color: .clear, goal: 10, frequency: 10, goalPeriod: "Week"),
-//            Habit(title: "title", description: "desc", color: .clear, goal: 10, frequency: 10, goalPeriod: "Week")
-//        ])
-//    )
-//}
+#Preview {
+    HabitsListView()
+        .modelContainer(for: Habit.self)
+}

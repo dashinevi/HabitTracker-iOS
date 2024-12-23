@@ -114,6 +114,7 @@ struct HabitDetailsView: View {
             
         }
         .padding(.horizontal)
+        .ignoresSafeArea(.keyboard)
     }
     
     

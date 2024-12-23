@@ -7,22 +7,21 @@
 
 import SwiftData
 import SwiftUI
+import Combine
 
 @main
 struct HabitTrackerApp: App {
-//    @AppStorage isOnboardingPassed = false
-    
+    @AppStorage("isOnboarding") var isOnboarding: Bool = true
+            
     var body: some Scene {
         WindowGroup {
-//            if isOnboardingPassed {
-//                Onboarding // set isOnboardingPassed = true on submit
-//            } else {
-//                ContentView()
-//            }
-            
-//            OnboardingView()
-            ContentView()
-                .fontDesign(.rounded)
+            if isOnboarding {
+                OnboardingView()
+                    .fontDesign(.rounded)
+            } else {
+                ContentView()
+                    .fontDesign(.rounded)
+            }
         }
         .modelContainer(for: Habit.self)
     }

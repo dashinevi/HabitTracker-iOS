@@ -11,6 +11,8 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @Query var habits: [Habit]
+    
+//    @AppStorage("isOnboarding") var isOnboarding: Bool?
    
     @State private var isShowingSheet = false
     
@@ -25,6 +27,7 @@ struct ContentView: View {
                 case .progress:
                     ProgressView()
                 }
+//                Button("Onboarding", action: { isOnboarding = true })
             }
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {

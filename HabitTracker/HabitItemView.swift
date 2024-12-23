@@ -33,9 +33,4 @@ struct HabitItemView: View {
     }
 }
 
-//#Preview {
-//    HabitItemView(title: "title", description: "desc", color: .clear)
-//    //        .frame(width: 380, height: 30)
-//    HabitItemView(title: "no desc", description: nil, color: .clear)
-//    //        .frame(width: 380, height: 30)
-//}
+
