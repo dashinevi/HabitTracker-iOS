@@ -27,8 +27,20 @@ struct HabitItemView: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 13)
-                .fill(Color(hex: habit.colorHex)?.opacity(0.5) ?? .white )
-                .strokeBorder(Color.primary, lineWidth: 1, antialiased: true)
+                .fill(
+                    LinearGradient(
+                        gradient: Gradient(colors: [
+                            Color(hex: habit.colorHex)?.opacity(0.5) ?? .white,
+                            .white, .white
+                        ]),
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 13)
+                        .stroke(Color.primary, lineWidth: 1)
+                )
         )
     }
 }

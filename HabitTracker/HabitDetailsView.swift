@@ -40,8 +40,8 @@ struct HabitDetailsView: View {
                     selectedColor = .white
                     isShowingSheet = false
                 }
-                .disabled(habitTitle.isEmpty)
-                .foregroundStyle(.myAccent.opacity(habitTitle.isEmpty ? 0.5 : 1))
+                .disabled(habitTitle.isEmpty || frequency == 0)
+                .foregroundStyle(.myAccent.opacity(habitTitle.isEmpty || frequency == 0 ? 0.5 : 1))
                 
             }
             .padding()
@@ -63,7 +63,7 @@ struct HabitDetailsView: View {
                         .fill(.clear)
                         .frame(maxWidth: .infinity))
                 
-                TextField("Enter a description", text: $habitDescription)
+                TextField("Enter a description (optional)", text: $habitDescription)
                     .frame(height: 50)
                     .padding(.horizontal)
                     .overlay(RoundedRectangle(cornerRadius: 15)

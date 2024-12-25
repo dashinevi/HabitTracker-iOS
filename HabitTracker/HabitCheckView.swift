@@ -25,6 +25,9 @@ struct HabitCheckView: View {
                 .foregroundColor(.black)
         }
     }
+    
+    
+
 }
 
 
