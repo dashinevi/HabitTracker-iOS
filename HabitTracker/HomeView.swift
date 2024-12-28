@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @AppStorage("user_name") var name: String = ""
+    @AppStorage("isOnboarding") var isOnboarding: Bool?
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -23,6 +24,8 @@ struct HomeView: View {
                     .fontWeight(.bold)
             }
             .padding(.horizontal)
+            Button("Onboarding", action: { isOnboarding = true })
+                .foregroundStyle(.clear)
             
             ZStack (alignment: .top) {
                 Image(.homeViewPic)
