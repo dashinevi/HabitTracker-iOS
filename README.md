@@ -1,5 +1,6 @@
 # Cozy Habit Tracker
-#### Video Demo: [Habit Tracker](https://youtu.be/mjIjBESNjG0)
+![habit_tracker](https://github.com/user-attachments/assets/cc4973c0-60c5-4335-a6e9-50b4c0ed454d)
+
 #### Overview
 This application is a cozy habit tracker designed for anyone aiming to develop new habits and monitor their progress. It combines my passion for coding with my need to maintain consistent habits.
 
